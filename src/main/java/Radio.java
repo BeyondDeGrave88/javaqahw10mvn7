@@ -13,28 +13,4 @@ public class Radio {
     public Radio(int currentRadioStation) {
         this.currentRadioStation = currentRadioStation;
     }
-
-    public int getCurrentRadioStation() {
-        return currentRadioStation;
-    }
-
-    public void setCurrentRadioStation(int currentRadioStation) {
-        this.currentRadioStation = currentRadioStation;
-    }
-
-    public int getCurrentVolume() {
-        return currentVolume;
-    }
-
-    public void setCurrentVolume(int currentVolume) {
-        this.currentVolume = currentVolume;
-    }
-
-    public int getQuantityOfStations() {
-        return quantityOfStations;
-    }
-
-    public void setQuantityOfStations(int quantityOfStations) {
-        this.quantityOfStations = quantityOfStations;
-    }
 }
