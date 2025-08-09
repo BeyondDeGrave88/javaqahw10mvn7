@@ -4,6 +4,68 @@ import org.junit.jupiter.api.Assertions;
 public class RadioTest {
 
     @Test
+    void shouldCreateRadioWithDefaultStations() {
+        Radio radio = new Radio();
+        int expected = 10;
+        int actual = radio.getQuantityOfStations();
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldCreateRadioWithCustomStations() {
+        Radio radio = new Radio(30);
+        int expected = 30;
+        int actual = radio.getQuantityOfStations();
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldGoFromLastToFirstStationCustom() {
+        Radio radio = new Radio(5);
+        radio.setCurrentRadioStation(4);
+        radio.nextRadioStation();
+        int expected = 0;
+        int actual = radio.getCurrentRadioStation();
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldGoFromFirstToLastStationCustom() {
+        Radio radio = new Radio(6);
+        radio.setCurrentRadioStation(0);
+        radio.prevRadioStation();
+        int expected = 5;
+        int actual = radio.getCurrentRadioStation();
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldSetStationAboveLimit() {
+        Radio radio = new Radio(5);
+        radio.setCurrentRadioStation(10);
+        int expected = 4;
+        int actual = radio.getCurrentRadioStation();
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldSetStationBelowZero() {
+        Radio radio = new Radio(5);
+        radio.setCurrentRadioStation(-3);
+        int expected = 0;
+        int actual = radio.getCurrentRadioStation();
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldDefaultTo10StationsIfNegativeNumberPassed() {
+        Radio radio = new Radio(-5);
+        int expected = 10;
+        int actual = radio.getQuantityOfStations();
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
     void shouldGoToNextStation() {
         Radio radio = new Radio();
         radio.setCurrentRadioStation(5);
@@ -137,6 +199,15 @@ public class RadioTest {
         radio.increaseVolume();
         int expected = 100;
         int actual = radio.getCurrentVolume();
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldSetStationEqualToQuantityLimit() {
+        Radio radio = new Radio(10); // 10 станций: 0-9
+        radio.setCurrentRadioStation(10); // ровно количество станций
+        int expected = 9; // должно ограничиться до последней
+        int actual = radio.getCurrentRadioStation();
         Assertions.assertEquals(expected, actual);
     }
 }
